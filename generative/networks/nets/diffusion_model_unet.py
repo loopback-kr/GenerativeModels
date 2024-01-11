@@ -1908,11 +1908,14 @@ class DiffusionModelUNet(nn.Module):
         if context is not None and self.with_conditioning is False:
             raise ValueError("model should have with_conditioning = True if context is provided")
         down_block_res_samples: list[torch.Tensor] = [h]
+        down_num = 0
         for downsample_block in self.down_blocks:
+            down_num+=1
             h, res_samples = downsample_block(hidden_states=h, temb=emb, context=context)
+            print(f"{down_num}th_down_block shape : ", h.shape)
             for residual in res_samples:
                 down_block_res_samples.append(residual)
-
+                print(f"{down_num}th_residual shape : ", residual.shape)
         # Additional residual conections for Controlnets
         if down_block_additional_residuals is not None:
             new_down_block_res_samples = ()
