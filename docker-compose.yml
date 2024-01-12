@@ -22,3 +22,5 @@ services:
     volumes:
       - $PWD:/workspace
       - /mnt/nas206/ANO_DET/:/workspace/datasets/ANO_DET
+    environment:
+      - PYTHONPATH:/workspace

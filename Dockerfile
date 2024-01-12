@@ -17,3 +17,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 RUN chown $USER:$USER /workspace
 USER $USER
+ENV PYTHONPATH=/workspace
